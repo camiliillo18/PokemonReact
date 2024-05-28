@@ -9,6 +9,8 @@ const PokemonDetails = () => {
     const [pokemon, setPokemon] = useState(null)
     const [editing, setEditing] = useState(false);
     const [newName, setNewName] = useState('');
+    const [errorsValidated, setErrorsValidated] = useState(undefined)
+
 
     useEffect(() => {
         const fetchPokemon = async () => {
@@ -37,10 +39,39 @@ const PokemonDetails = () => {
     }
 
     const handleOnSave = async () => {
+      const errors = validations();
+
+      if (errors) {
+        const alertErrors = errors.filter(e => e.type == 'alert');
+        alertErrors.forEach(a => alert(a.description));
+        const textErrors = errors.filter(e => e.type == 'text');
+        setErrorsValidated(textErrors);
+      } else {
         await updatePokemonName(id, newName);
         setPokemon({ ...pokemon, nombre: newName });
         setEditing(false);
-      };
+        setErrorsValidated(undefined);
+      }
+    };
+
+      const validations = () => {
+        const errors = [];
+        if (!pokemon) {
+            errors.push({
+                name: "pokemon",
+                type: "alert",
+                description: "pokemon no está definido"
+            })
+        }
+        if (!newName) {
+          errors.push({
+              name: "nombreEdit",
+              type: "text",
+              description: "Nuevo nombre es un campo requerido"
+          })
+      }
+        return errors.length > 0 ? errors : undefined
+    }
 
     return (
         <div>
@@ -49,12 +80,17 @@ const PokemonDetails = () => {
             <div>
               <h2>Editar Nombre del Pokémon</h2>
               <span>Nuevo nombre: </span>
-              <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)}/>
+              {
+                errorsValidated 
+                && errorsValidated.find(e => e.name == 'nombreEdit' )
+                && <span style={{color: 'red'}}>{errorsValidated.find(e => e.name == 'nombreEdit' ).description}</span>
+            }
+              <input type="text" name='nombreEdit' value={newName} onChange={(e) => setNewName(e.target.value)}/>
               <button onClick={handleOnSave}>Guardar</button>
             </div>
           ) : (
             <div>
-              <h1>Detalles del Pokémon</h1>
+              <h2>Detalles del Pokémon</h2>
               <div>
                 <span>Id: {pokemon.id}</span>
               </div>
@@ -71,7 +107,7 @@ const PokemonDetails = () => {
                 <span>Peso: {pokemon.peso}</span>
               </div>
               <div>
-                <span>Tipo: {pokemon.tipo}</span>
+                <span>Tipo: {pokemon.tipo.join(", ")}</span>
               </div>
               <button onClick={handleOnEdit}>Editar</button>
               <button onClick={handleOnDelete}>Eliminar Pokémon</button>

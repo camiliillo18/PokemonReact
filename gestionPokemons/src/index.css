@@ -45,13 +45,23 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 button:hover {
-  border-color: #646cff;
+  border-color: black;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  &:hover {
+    border-color: black;
+    transition: all .3s;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -77,4 +87,14 @@ button:focus-visible {
       content: "| ";
     }
   }
+  div {
+    a {
+      color: black;
+      &:hover {
+        color: #828282;
+        transition: all .3s;
+      }
+    }
+  }
+  
 }

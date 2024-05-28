@@ -10,7 +10,7 @@ const ContactPage = () => {
         flexDirection: 'column',
         gap: 5
       }}>
-          <span>Name: Camilo Dubra</span>
+          <span>Name: Camilo</span>
           <span>Last Name: Dubra Corchs</span>
           <span>City: Málaga</span>
           <span><a href="https://github.com/camiliillo18">Github</a></span>

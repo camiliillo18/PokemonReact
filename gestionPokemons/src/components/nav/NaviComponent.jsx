@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { getUserLogged } from '../../core/store/Store'
 
 const NaviComponent = (props) => {
-    const [userLogged, setUserLogged] = useState(undefined)
-    const getUserLoggedFromServer = () => {
-        const aux = getUserLogged()
-        setUserLogged(aux)
-    }
-    useEffect(() => {
-        getUserLoggedFromServer()
-    }, [])
     
     const {currentPage} = props
   return (
