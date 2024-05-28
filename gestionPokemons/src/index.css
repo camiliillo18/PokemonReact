@@ -66,3 +66,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.navBarLinks {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: center;
+  gap: 5px;
+  div:nth-child(even) {
+    &::before{
+      content: "| ";
+    }
+  }
+}

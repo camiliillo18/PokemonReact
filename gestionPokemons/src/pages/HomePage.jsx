@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { getPokemons } from '../services/pokemonService'
 import NaviComponent from '../components/nav/NaviComponent'
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
-    const [pokemons, setPokemons] = useState(undefined)
+    const [pokemons, setPokemons] = useState(undefined);
+    const navigate = useNavigate();
 
     const getDataFromAPI = () => {
         const aux = getPokemons()
         setPokemons(aux)
     }
 
+    const goToPokemonPage = (id) => {
+        navigate(`/pokemon/${id}`)
+    }
+
     useEffect(() => {
         getDataFromAPI()
     }, [])
 
-    const pokemonPage = () => {
-        
-    }
 
   return (
     <div>
@@ -34,7 +37,7 @@ const HomePage = () => {
                         <div>
                             {
                                 pokemons.map(p => (
-                                    <div style={{border: '2px solid', marginBottom: 5}}>
+                                    <div key={p.id} style={{border: '2px solid', marginBottom: 5, padding: 10,}}>
                                         <div>
                                             <span>Id: {p.id}</span>
                                         </div>
@@ -42,22 +45,7 @@ const HomePage = () => {
                                             <span>Nombre: {p.nombre}</span>
                                         </div>
                                         <div>
-                                            <span>Url: {p.url}</span>
-                                        </div>
-                                        <div>
-                                            <span>Altura: {p.altura}</span>
-                                        </div>
-                                        <div>
-                                            <span>Password: {p.password}</span>
-                                        </div>
-                                        <div>
-                                            <span>Peso: {p.peso}</span>
-                                        </div>
-                                        <div>
-                                            <span>Tipo: {p.tipo}</span>
-                                        </div>
-                                        <div>
-                                            <button onClick={pokemonPage()}>Ir al pokemon</button>
+                                            <button onClick={() => goToPokemonPage(p.id)}>Ir al pokemon</button>
                                         </div>
                                     </div>
                                 ))

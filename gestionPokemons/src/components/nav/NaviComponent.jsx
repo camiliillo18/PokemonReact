@@ -14,7 +14,7 @@ const NaviComponent = (props) => {
     
     const {currentPage} = props
   return (
-    <nav style={{ display: 'flex', flexDirection: 'row', gap: 5}}>
+    <nav className='navBarLinks'>
         
         {
             currentPage 
@@ -22,7 +22,6 @@ const NaviComponent = (props) => {
             && (
                 <div>
                     <Link to={'/'}>Home</Link>
-                    <span> | </span>
                 </div>
             )
         }
@@ -32,7 +31,6 @@ const NaviComponent = (props) => {
             && (
                 <div>
                     <Link to={'/addPokemon'}>Registrar un Pokemon</Link>
-                    <span> | </span>
                 </div>
             )
         }
@@ -42,32 +40,13 @@ const NaviComponent = (props) => {
             && (
                 <div>
                     <Link to={'/contact'}>Contacto</Link>
-                    <span> | </span>
                 </div>
             )
         }
         {
             currentPage 
-            && currentPage !== 'notFound'
-            && (
-                <div>
-                    <Link to={'/notfound'}>Not Found</Link>
-                    <span> | </span>
-                </div>
-            )
+            && currentPage !== 'details'
         }
-        <Link to={'/login'}>Cerrar sesión</Link>
-        <span> | </span>
-            {
-                userLogged
-                && (
-                    <div>
-                        <span>Hola, {userLogged.username}</span>
-                        <span> | </span>
-                    </div>
-                )
-            }
-
     </nav>
   )
 }

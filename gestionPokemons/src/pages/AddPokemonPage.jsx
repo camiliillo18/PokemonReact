@@ -30,7 +30,6 @@ const AddPokemonPage = () => {
         })
     }
 
-
     const handlerOnClick = () => {
         addPokemon(newPokemon)
         navigate('/')

@@ -11,8 +11,9 @@ const ContactPage = () => {
         gap: 5
       }}>
           <span>Name: Camilo Dubra</span>
-          <span>Edad: 19</span>
-          <span><a href="https://www.linkedin.com/in/camilo-dubra-corchs-039232223/">Linkedin</a></span>
+          <span>Last Name: Dubra Corchs</span>
+          <span>City: Málaga</span>
+          <span><a href="https://github.com/camiliillo18">Github</a></span>
       </div>
     </div>
   )
